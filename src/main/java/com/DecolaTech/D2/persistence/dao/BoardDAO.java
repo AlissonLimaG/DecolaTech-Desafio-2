@@ -1,6 +1,5 @@
 package com.DecolaTech.D2.persistence.dao;
 
-import com.DecolaTech.D2.persistence.entity.BoardColumnKingEnum;
 import com.DecolaTech.D2.persistence.entity.BoardEntity;
 import com.mysql.cj.jdbc.StatementImpl;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,7 @@ public class BoardDAO {
 
     private final Connection connection;
 
-    private BoardEntity insert(final BoardEntity entity)throws SQLException{
+    public BoardEntity insert(final BoardEntity entity)throws SQLException{
         var sql = "INSERT INTO BOARDS(name) VALUES(?)";
         try(var statement = connection.prepareStatement(sql)){
             statement.setString(1,entity.getName());
@@ -26,7 +25,7 @@ public class BoardDAO {
         return entity;
     }
 
-    private void delete(final Long id) throws SQLException{
+    public void delete(final Long id) throws SQLException{
         var sql = "DELETE FROM BOARDS WHERE id=?";
         try(var statement = connection.prepareStatement(sql)){
             statement.setLong(1,id);
@@ -34,8 +33,8 @@ public class BoardDAO {
         }
     }
 
-    private Optional<BoardEntity> findById(final Long id)throws SQLException{
-        var sql = "SELECT 1 FROM BOARDS WHERE id=?";
+    public Optional<BoardEntity> findById(final Long id)throws SQLException{
+        var sql = "SELECT id, name FROM BOARDS WHERE id=?";
         try(var statement = connection.prepareStatement(sql)){
             statement.setLong(1, id);
             statement.executeQuery();
@@ -50,7 +49,7 @@ public class BoardDAO {
         }
     }
 
-    private boolean exists(final Long id)throws SQLException{
+    public boolean exists(final Long id)throws SQLException{
         var sql = "SELECT 1 FROM BOARDS WHERE id=?";
         try(var statement = connection.prepareStatement(sql)){
             statement.setLong(1, id);

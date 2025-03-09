@@ -1,67 +1,39 @@
-mar. 06, 2025 4:27:12 PM liquibase.changelog
+mar. 08, 2025 2:30:46 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061340.sql
-mar. 06, 2025 4:27:12 PM liquibase.changelog
+mar. 08, 2025 2:30:46 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061555.sql
-mar. 06, 2025 4:27:12 PM liquibase.changelog
+mar. 08, 2025 2:30:46 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061601.sql
-mar. 06, 2025 4:27:12 PM liquibase.changelog
+mar. 08, 2025 2:30:46 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061605.sql
-mar. 06, 2025 4:27:12 PM liquibase.changelog
-INFORMAÇÕES: Creating database history table with name: decola_board.DATABASECHANGELOG
-mar. 06, 2025 4:27:14 PM liquibase.changelog
+mar. 08, 2025 2:30:46 PM liquibase.changelog
 INFORMAÇÕES: Reading from decola_board.DATABASECHANGELOG
-mar. 06, 2025 4:27:17 PM liquibase.lockservice
-INFORMAÇÕES: Successfully acquired change log lock
-mar. 06, 2025 4:27:17 PM liquibase.command
-INFORMAÇÕES: Using deploymentId: 1289237421
-mar. 06, 2025 4:27:17 PM liquibase.changelog
+Database is up to date, no changesets to execute
+mar. 08, 2025 2:30:46 PM liquibase.changelog
 INFORMAÇÕES: Reading from decola_board.DATABASECHANGELOG
-Running Changeset: db/changelog/migrations/db.changelog-202503061340.sql::202503061340::alisson
-mar. 06, 2025 4:27:18 PM liquibase.changelog
-INFORMAÇÕES: Custom SQL executed
-mar. 06, 2025 4:27:18 PM liquibase.changelog
-INFORMAÇÕES: ChangeSet db/changelog/migrations/db.changelog-202503061340.sql::202503061340::alisson ran successfully in 1161ms
-Running Changeset: db/changelog/migrations/db.changelog-202503061555.sql::202503061555::alisson
-mar. 06, 2025 4:27:20 PM liquibase.changelog
-INFORMAÇÕES: Custom SQL executed
-mar. 06, 2025 4:27:20 PM liquibase.changelog
-INFORMAÇÕES: ChangeSet db/changelog/migrations/db.changelog-202503061555.sql::202503061555::alisson ran successfully in 1322ms
-Running Changeset: db/changelog/migrations/db.changelog-202503061601.sql::202503061601::alisson
-mar. 06, 2025 4:27:21 PM liquibase.changelog
-INFORMAÇÕES: Custom SQL executed
-mar. 06, 2025 4:27:21 PM liquibase.changelog
-INFORMAÇÕES: ChangeSet db/changelog/migrations/db.changelog-202503061601.sql::202503061601::alisson ran successfully in 1533ms
-Running Changeset: db/changelog/migrations/db.changelog-202503061605.sql::202503061605::alisson
-mar. 06, 2025 4:27:23 PM liquibase.changelog
-INFORMAÇÕES: Custom SQL executed
-mar. 06, 2025 4:27:23 PM liquibase.changelog
-INFORMAÇÕES: ChangeSet db/changelog/migrations/db.changelog-202503061605.sql::202503061605::alisson ran successfully in 1545ms
 
 UPDATE SUMMARY
-Run:                          4
-Previously run:               0
+Run:                          0
+Previously run:               4
 Filtered out:                 0
 -------------------------------
 Total change sets:            4
 
-mar. 06, 2025 4:27:24 PM liquibase.util
+mar. 08, 2025 2:30:46 PM liquibase.util
 INFORMAÇÕES: UPDATE SUMMARY
-mar. 06, 2025 4:27:24 PM liquibase.util
-INFORMAÇÕES: Run:                          4
-mar. 06, 2025 4:27:24 PM liquibase.util
-INFORMAÇÕES: Previously run:               0
-mar. 06, 2025 4:27:24 PM liquibase.util
+mar. 08, 2025 2:30:46 PM liquibase.util
+INFORMAÇÕES: Run:                          0
+mar. 08, 2025 2:30:46 PM liquibase.util
+INFORMAÇÕES: Previously run:               4
+mar. 08, 2025 2:30:46 PM liquibase.util
 INFORMAÇÕES: Filtered out:                 0
-mar. 06, 2025 4:27:24 PM liquibase.util
+mar. 08, 2025 2:30:46 PM liquibase.util
 INFORMAÇÕES: -------------------------------
-mar. 06, 2025 4:27:24 PM liquibase.util
+mar. 08, 2025 2:30:46 PM liquibase.util
 INFORMAÇÕES: Total change sets:            4
-mar. 06, 2025 4:27:24 PM liquibase.util
+mar. 08, 2025 2:30:46 PM liquibase.util
 INFORMAÇÕES: Update summary generated
-mar. 06, 2025 4:27:24 PM liquibase.command
-INFORMAÇÕES: Update command completed successfully.
-Liquibase: Update has been successful. Rows affected: 4
-mar. 06, 2025 4:27:24 PM liquibase.lockservice
+mar. 08, 2025 2:30:46 PM liquibase.lockservice
 INFORMAÇÕES: Successfully released change log lock
-mar. 06, 2025 4:27:24 PM liquibase.command
+mar. 08, 2025 2:30:46 PM liquibase.command
 INFORMAÇÕES: Command execution complete
