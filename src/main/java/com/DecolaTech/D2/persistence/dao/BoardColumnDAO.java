@@ -1,5 +1,6 @@
 package com.DecolaTech.D2.persistence.dao;
 
+import com.DecolaTech.D2.persistence.dto.BoardColumnDTO;
 import com.DecolaTech.D2.persistence.entity.BoardColumnEntity;
 import com.DecolaTech.D2.persistence.entity.BoardColumnKindEnum;
 import com.mysql.cj.jdbc.StatementImpl;
@@ -48,4 +49,36 @@ public class BoardColumnDAO {
             }
         }return boardColumns;
     }
+
+    public List<BoardColumnDTO> findByBoardIdWithDetails(Long id) throws SQLException{
+        List<BoardColumnDTO> dtos = new ArrayList<>();
+        var sql =
+                """
+                SELECT bc.id,
+                       bc.name,
+                       bc.kind, 
+                       COUNT(SELECT c.id 
+                                FROM CARDS c 
+                                    WHERE c.board_column_id = bc.id) cards_amount
+                FROM BOARDS_COLUMNS bc
+                WHERE board_id = ? ORDER BY `order`
+                """;
+        try(var statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeQuery();
+            var resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                var dto = new BoardColumnDTO(
+                        resultSet.getLong("bc.id"),
+                        resultSet.getString("bc.name"),
+                        BoardColumnKindEnum.findByName(resultSet.getString("bc.kind")),
+                        resultSet.getInt("cards_amount")
+                );
+                dtos.add(dto);
+            }
+        }
+        return dtos;
+    }
 }
+
+
