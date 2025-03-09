@@ -3,6 +3,7 @@ package com.DecolaTech.D2.persistence.dao;
 import com.DecolaTech.D2.persistence.dto.BoardColumnDTO;
 import com.DecolaTech.D2.persistence.entity.BoardColumnEntity;
 import com.DecolaTech.D2.persistence.entity.BoardColumnKindEnum;
+import com.DecolaTech.D2.persistence.entity.CardEntity;
 import com.mysql.cj.jdbc.StatementImpl;
 import lombok.RequiredArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class BoardColumnDAO {
@@ -17,7 +19,7 @@ public class BoardColumnDAO {
     private final Connection connection;
 
     public BoardColumnEntity insert(BoardColumnEntity entity) throws SQLException{
-        var sql = "INSERT INTO BOARDS_COLUMNS(name,`order`,kind,board_id) VALUES(?, ?, ?, ?)";
+        var sql = "INSERT INTO BOARDS_COLUMNS(name,`order`,kind,board_boardId) VALUES(?, ?, ?, ?)";
         try(var statement = connection.prepareStatement(sql)){
             var i = 1;
             statement.setString(i++, entity.getName());
@@ -32,44 +34,44 @@ public class BoardColumnDAO {
         }
     }
 
-    public List<BoardColumnEntity> findByBoardId(Long id) throws SQLException{
+    public List<BoardColumnEntity> findByBoardId(Long boardId) throws SQLException{
         List<BoardColumnEntity> boardColumns = new ArrayList<>();
-        var sql = "SELECT * FROM BOARDS_COLUMNS WHERE board_id = ? ORDER BY `order`";
+        var sql = "SELECT * FROM BOARDS_COLUMNS WHERE board_boardId = ? ORDER BY `order`";
         try(var statement = connection.prepareStatement(sql)) {
-            statement.setLong(1, id);
+            statement.setLong(1, boardId);
             statement.executeQuery();
             var resultSet = statement.getResultSet();
             while (resultSet.next()) {
-                var entitiy = new BoardColumnEntity();
-                entitiy.setId(resultSet.getLong("id"));
-                entitiy.setName(resultSet.getString("name"));
-                entitiy.setOrder(resultSet.getInt("order"));
-                entitiy.setKind(BoardColumnKindEnum.findByName(resultSet.getString("kind")));
-                boardColumns.add(entitiy);
+                var entity = new BoardColumnEntity();
+                entity.setId(resultSet.getLong("boardId"));
+                entity.setName(resultSet.getString("name"));
+                entity.setOrder(resultSet.getInt("order"));
+                entity.setKind(BoardColumnKindEnum.findByName(resultSet.getString("kind")));
+                boardColumns.add(entity);
             }
         }return boardColumns;
     }
 
-    public List<BoardColumnDTO> findByBoardIdWithDetails(Long id) throws SQLException{
+    public List<BoardColumnDTO> findByBoardIdWithDetails(Long boardId) throws SQLException{
         List<BoardColumnDTO> dtos = new ArrayList<>();
         var sql =
                 """
-                SELECT bc.id,
+                SELECT bc.boardId,
                        bc.name,
                        bc.kind, 
-                       COUNT(SELECT c.id 
+                       COUNT(SELECT c.boardId 
                                 FROM CARDS c 
-                                    WHERE c.board_column_id = bc.id) cards_amount
+                                    WHERE c.board_column_boardId = bc.boardId) cards_amount
                 FROM BOARDS_COLUMNS bc
-                WHERE board_id = ? ORDER BY `order`
+                WHERE board_boardId = ? ORDER BY `order`
                 """;
         try(var statement = connection.prepareStatement(sql)) {
-            statement.setLong(1, id);
+            statement.setLong(1, boardId);
             statement.executeQuery();
             var resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 var dto = new BoardColumnDTO(
-                        resultSet.getLong("bc.id"),
+                        resultSet.getLong("bc.boardId"),
                         resultSet.getString("bc.name"),
                         BoardColumnKindEnum.findByName(resultSet.getString("bc.kind")),
                         resultSet.getInt("cards_amount")
@@ -79,6 +81,39 @@ public class BoardColumnDAO {
         }
         return dtos;
     }
+
+    public Optional<BoardColumnEntity> findById(Long boardId) throws SQLException{
+        var sql = 
+            """
+            SELECT bc.name,
+                   bc.kind,
+                   c.id,
+                   c.title,
+                   c.description
+                   FROM BOARDS_COLUMNS bc
+                   INNER JOIN CARDS c
+                        ON c.board_column_id = bc.id
+                   WHERE bc.id = ?
+            """;
+        try(var statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, boardId);
+            statement.executeQuery();
+            var resultSet = statement.getResultSet();
+            if(resultSet.next()){
+                var entity = new BoardColumnEntity();
+                entity.setName(resultSet.getString("bc.name"));
+                entity.setKind(BoardColumnKindEnum.findByName(resultSet.getString("bc.kind")));
+                do{
+                    var card = new CardEntity();
+                    card.setId(resultSet.getLong("c.id"));
+                    card.setTitle(resultSet.getString("c.title"));
+                    card.setDescription(resultSet.getString("c.title"));
+                    entity.getCards().add(card);
+                }while (resultSet.next());
+            }
+        }return Optional.empty();
+    }
+    
 }
 
 
