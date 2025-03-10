@@ -1,6 +1,7 @@
 package com.DecolaTech.D2.ui;
 
 import com.DecolaTech.D2.persistence.config.ConnectionConfig;
+import com.DecolaTech.D2.persistence.dto.BoardColumnInfoDTO;
 import com.DecolaTech.D2.persistence.entity.BoardColumnEntity;
 import com.DecolaTech.D2.persistence.entity.BoardColumnKindEnum;
 import com.DecolaTech.D2.persistence.entity.BoardEntity;
@@ -73,7 +74,19 @@ public class BoardMenu {
         }
     }
 
-    private void moveCardToNextColumn() {
+    private void moveCardToNextColumn() throws SQLException {
+        System.out.println("Informe o id do card que deseja mover para a próxima coluna");
+        var cardId = scanner.nextLong();
+        var boardColumnsInfo = entity.getBoardColumns().stream()
+                .map(bc -> new BoardColumnInfoDTO(bc.getId(), bc.getOrder(),bc.getKind()))
+                .toList();
+
+        try(var connection = ConnectionConfig.getConnection()){
+            new CardService(connection).moveToNextColumn(cardId, boardColumnsInfo);
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     private void blockCard() {
