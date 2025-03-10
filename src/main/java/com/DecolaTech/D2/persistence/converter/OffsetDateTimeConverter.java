@@ -5,14 +5,17 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
-
+import java.util.Objects;
 import static java.time.ZoneOffset.UTC;
+import static java.util.Objects.nonNull;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OffsetDateTimeConverter {
 
     public static OffsetDateTime toOffsetDateTime(final Timestamp value){
-        return OffsetDateTime.ofInstant(value.toInstant(), UTC);
+        return  Objects.nonNull(value)
+                ? OffsetDateTime.ofInstant(value.toInstant(), UTC)
+                : null;
     }
 
 }
