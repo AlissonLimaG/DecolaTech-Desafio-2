@@ -1,15 +1,15 @@
-mar. 10, 2025 10:16:15 PM liquibase.changelog
+mar. 10, 2025 11:00:48 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061340.sql
-mar. 10, 2025 10:16:15 PM liquibase.changelog
+mar. 10, 2025 11:00:48 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061555.sql
-mar. 10, 2025 10:16:15 PM liquibase.changelog
+mar. 10, 2025 11:00:48 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061601.sql
-mar. 10, 2025 10:16:15 PM liquibase.changelog
+mar. 10, 2025 11:00:48 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202503061605.sql
-mar. 10, 2025 10:16:15 PM liquibase.changelog
+mar. 10, 2025 11:00:48 PM liquibase.changelog
 INFORMAÇÕES: Reading from decola_board.DATABASECHANGELOG
 Database is up to date, no changesets to execute
-mar. 10, 2025 10:16:15 PM liquibase.changelog
+mar. 10, 2025 11:00:48 PM liquibase.changelog
 INFORMAÇÕES: Reading from decola_board.DATABASECHANGELOG
 
 UPDATE SUMMARY
@@ -19,21 +19,21 @@ Filtered out:                 0
 -------------------------------
 Total change sets:            4
 
-mar. 10, 2025 10:16:15 PM liquibase.util
+mar. 10, 2025 11:00:48 PM liquibase.util
 INFORMAÇÕES: UPDATE SUMMARY
-mar. 10, 2025 10:16:15 PM liquibase.util
+mar. 10, 2025 11:00:48 PM liquibase.util
 INFORMAÇÕES: Run:                          0
-mar. 10, 2025 10:16:15 PM liquibase.util
+mar. 10, 2025 11:00:48 PM liquibase.util
 INFORMAÇÕES: Previously run:               4
-mar. 10, 2025 10:16:15 PM liquibase.util
+mar. 10, 2025 11:00:48 PM liquibase.util
 INFORMAÇÕES: Filtered out:                 0
-mar. 10, 2025 10:16:15 PM liquibase.util
+mar. 10, 2025 11:00:48 PM liquibase.util
 INFORMAÇÕES: -------------------------------
-mar. 10, 2025 10:16:15 PM liquibase.util
+mar. 10, 2025 11:00:48 PM liquibase.util
 INFORMAÇÕES: Total change sets:            4
-mar. 10, 2025 10:16:15 PM liquibase.util
+mar. 10, 2025 11:00:48 PM liquibase.util
 INFORMAÇÕES: Update summary generated
-mar. 10, 2025 10:16:15 PM liquibase.lockservice
+mar. 10, 2025 11:00:48 PM liquibase.lockservice
 INFORMAÇÕES: Successfully released change log lock
-mar. 10, 2025 10:16:15 PM liquibase.command
+mar. 10, 2025 11:00:48 PM liquibase.command
 INFORMAÇÕES: Command execution complete

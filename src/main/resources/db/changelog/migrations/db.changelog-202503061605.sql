@@ -12,4 +12,4 @@ CREATE TABLE BLOCKS(
     CONSTRAINT cards__blocks_fk FOREIGN KEY (card_id) REFERENCES CARDS(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
---rollback DROP TABLE blocks
+--rollback DROP TABLE BLOCKS

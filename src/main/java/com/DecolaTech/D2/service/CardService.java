@@ -1,5 +1,6 @@
 package com.DecolaTech.D2.service;
 
+import com.DecolaTech.D2.persistence.dao.BlockDAO;
 import com.DecolaTech.D2.persistence.dao.CardDAO;
 import com.DecolaTech.D2.persistence.dto.BoardColumnInfoDTO;
 import com.DecolaTech.D2.persistence.entity.BoardColumnKindEnum;
@@ -90,6 +91,32 @@ public class CardService {
             dao.moveToColumn(cancelColumnId, cardId);
             connection.commit();
         } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        }
+    }
+
+    public void block(final Long id, final String reason, final List<BoardColumnInfoDTO> boardColumnsInfo) throws SQLException{
+        try{
+            var dao = new CardDAO(connection);
+            var optional = dao.findById(id);
+            var dto = optional.orElseThrow(() -> new EntityNotFoundException("O card de id %s não foi encontrado".formatted(id)));
+
+            if(dto.blocked()){
+                throw new CardBlockedException("O card %s já está bloqueado".formatted(id));
+            }
+            var currentColumn = boardColumnsInfo.stream()
+                    .filter(bc -> bc.id().equals(dto.columnId()))
+                    .findFirst()
+                    .orElseThrow();
+            if(currentColumn.kind().equals(BoardColumnKindEnum.FINAL) || currentColumn.kind().equals(BoardColumnKindEnum.CANCEL)){
+                var message = "O card está em um coluna do tipo %s e não pode ser bloqueado".formatted(currentColumn.kind());
+                throw new IllegalStateException(message);
+            }
+            var blockDAO = new BlockDAO(connection);
+            blockDAO.block(id, reason);
+            connection.commit();;
+        }catch (SQLException ex){
             connection.rollback();
             throw ex;
         }
