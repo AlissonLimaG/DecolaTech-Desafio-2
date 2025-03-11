@@ -56,9 +56,8 @@ public class BoardMenu {
                     default -> System.out.println("Opção iválida, selecione uma opção do menu!");
                 }
             }
-        }catch (SQLException ex){
-            ex.printStackTrace();
-            System.exit(0);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -83,7 +82,7 @@ public class BoardMenu {
 
         try(var connection = ConnectionConfig.getConnection()){
             new CardService(connection).moveToNextColumn(cardId, boardColumnsInfo);
-        }catch (SQLException ex){
+        }catch (RuntimeException ex){
             System.out.println(ex.getMessage());
         }
 
@@ -95,7 +94,18 @@ public class BoardMenu {
     private void unblockCard() {
     }
 
-    private void cancelCard() {
+    private void cancelCard() throws SQLException {
+        System.out.println("Informe o id do card que deseja mover para a coluna de cancelamento");
+        var cardId = scanner.nextLong();
+        var cancelColumn = entity.getCancelColumn();
+        var boardColumnsInfo = entity.getBoardColumns().stream()
+                .map(bc -> new BoardColumnInfoDTO(bc.getId(), bc.getOrder(), bc.getKind()))
+                .toList();
+        try(var connection = getConnection()){
+            new CardService(connection).cancel(cardId, cancelColumn.getId(), boardColumnsInfo);
+        } catch (RuntimeException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     private void showBoard() throws SQLException {
@@ -128,7 +138,7 @@ public class BoardMenu {
         }
     }
 
-    private void showCard() {
+    private void showCard() throws SQLException {
         System.out.println("Informe o id do card que deseja visualizar");
         var selectedCardId = scanner.nextLong();
         try(var connection = ConnectionConfig.getConnection()){
@@ -144,9 +154,6 @@ public class BoardMenu {
                                 System.out.printf("Está no momento na coluna %s - %s\n", c.columnId(), c.columnName());
                             },
                             () -> System.out.printf("Não existe um card com id %s\n", selectedCardId));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-
     }
 }

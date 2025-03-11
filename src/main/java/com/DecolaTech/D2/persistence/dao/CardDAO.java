@@ -23,7 +23,7 @@ public class CardDAO {
             var i = 1;
             statement.setString(i++, entity.getTitle());
             statement.setString(i++, entity.getDescription());
-            statement.setLong(i++, entity.getBoardColumn().getId());
+            statement.setLong(i, entity.getBoardColumn().getId());
             statement.executeUpdate();
 
             if(statement instanceof StatementImpl impl){
@@ -34,11 +34,11 @@ public class CardDAO {
     }
 
     public void moveToColumn(final Long columnId, final Long cardId) throws SQLException {
-        var sql = "UPDATE CARDS SET board_column_id = ? WHERE id = ?";
+        var sql = "UPDATE CARDS SET board_column_id = ? WHERE id = ?;";
         try(var statement = connection.prepareStatement(sql)){
             var i = 1;
             statement.setLong(i++, columnId);
-            statement.setLong(i++, cardId);
+            statement.setLong(i, cardId);
             statement.executeUpdate();
         }
     }
