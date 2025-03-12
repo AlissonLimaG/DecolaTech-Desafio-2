@@ -1,1 +1,6 @@
-1 - Impedir que um card de outro board seja recuperado numa consulta.
+1 - Um card deve armazenar a data e hora em que foi colocado numa coluna e a data e hora em que foi movido para a próxima
+2 - O código deve gerar um relatório do board selecionado com o tempo que cada tarefa demorou para ser concluída com informações
+do tempo que levou em cada coluna
+3 - O código deve gerar um relatório do board selecionado com os bloqueios dos cards, com o tempo que ficaram bloqueados
+e com a justificativa dos bloqueios e desbloqueios.
+4 - Impedir que um card de outro board seja recuperado numa consulta.
