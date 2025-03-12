@@ -55,7 +55,7 @@ public class CardDAO {
                        bc.name,
                        (SELECT COUNT(sub_b.id)
                                 FROM BLOCKS sub_b
-                                    WHERE sub_b.id = c.id) blocks_amount
+                                    WHERE sub_b.card_id = c.id) blocks_amount
                        FROM CARDS c
                        LEFT JOIN BLOCKS b
                             ON c.id = b.card_id
