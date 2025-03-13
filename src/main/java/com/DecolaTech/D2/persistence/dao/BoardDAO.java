@@ -58,5 +58,13 @@ public class BoardDAO {
         }
     }
 
+    public boolean existsAny() throws SQLException {
+        var sql = "SELECT 1 FROM BOARDS;";
+        try(var statement = connection.prepareStatement(sql)){
+            statement.executeQuery();
+            return statement.getResultSet().next();
+        }
+    }
+
 
 }
